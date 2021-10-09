@@ -34,6 +34,7 @@ db.on('disconnected', () => console.log(`User... it was nice to meet you. Goodby
 
 const app = express()
 app.use(methOv('_method'))
+app.use(express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded({
     extended: true

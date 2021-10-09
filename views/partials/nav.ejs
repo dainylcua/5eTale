@@ -1,12 +1,20 @@
-<nav>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-start">
+        <a href="/" class="navbar-item">Home</a>
+        <a href="/" class="navbar-item">Items</a>
+    </div>
     <% if(currentUser) { %>
-    <a href="/">Home</a>
-    <form action="/sessions?_method=DELETE" method="POST">
-        <input type="submit" value="Log Out" />
-    </form>
+    <div class="navbar-end">
+        <a class="navbar-item">UserName</a>
+        <a href="/" class="navbar-item has-text-centered">Favorites</a>
+        <form class="navbar-item" action="/sessions?_method=DELETE" method="POST">
+                <input class="button" type="submit" value="Log Out" />
+        </form>
+    </div>
     <% } else { %>
-    <a href="/">Home</a>
-    <a href="/users/new">Register</a>
-    <a href="/sessions/new">Login</a>
+    <div class="navbar-end">
+        <a class="navbar-item" href="/users/new">Register</a>
+        <a class="navbar-item" href="/sessions/new">Login</a>
+    </div>
     <% } %>
 </nav>

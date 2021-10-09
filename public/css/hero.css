@@ -1,0 +1,60 @@
+:root {
+    --hrt: #FF3011 /* determination-red */
+}
+
+.hero-holder {
+    z-index: 2;
+}
+
+.is-size-huge {
+    font-size: 15rem;
+}
+
+.is-size-big {
+    font-size: 4rem;
+}
+
+.hero-body > .title {
+    font-family: var(--body-fonts);
+}
+
+.hero-body > .subtitle {
+    font-family: var(--main-fonts);
+}
+
+.hero {
+    background-color: var(--bg1);
+}
+
+.heart-container {
+    width:256px;
+    height:256px;
+    z-index: -1;
+}
+
+.heart-holder {
+    scale: 2;
+    position: relative;
+    opacity: 0.2;
+    right: -5rem;
+}
+
+.pixel {
+    width:1rem;
+    height:1rem; 
+    float:left;
+    background-color: var(--hrt);
+}
+
+.pixel:nth-child(1), .pixel:nth-child(2), .pixel:nth-child(5), .pixel:nth-child(6), .pixel:nth-child(7), .pixel:nth-child(8), .pixel:nth-child(9), .pixel:nth-child(10), .pixel:nth-child(11), .pixel:nth-child(12), .pixel:nth-child(15), .pixel:nth-child(16),
+.pixel:nth-child(17), .pixel:nth-child(23), .pixel:nth-child(24), .pixel:nth-child(25), .pixel:nth-child(26), .pixel:nth-child(32),
+.pixel:nth-child(40), .pixel:nth-child(41),
+.pixel:nth-child(56), .pixel:nth-child(57),
+.pixel:nth-child(161), .pixel:nth-child(162), .pixel:nth-child(175), .pixel:nth-child(176),
+.pixel:nth-child(177), .pixel:nth-child(178), .pixel:nth-child(191), .pixel:nth-child(192),
+.pixel:nth-child(193), .pixel:nth-child(194), .pixel:nth-child(195), .pixel:nth-child(196), .pixel:nth-child(205), .pixel:nth-child(206), .pixel:nth-child(207), .pixel:nth-child(208),
+.pixel:nth-child(209), .pixel:nth-child(210), .pixel:nth-child(211), .pixel:nth-child(212), .pixel:nth-child(221), .pixel:nth-child(222), .pixel:nth-child(223), .pixel:nth-child(224),
+.pixel:nth-child(224), .pixel:nth-child(225), .pixel:nth-child(226), .pixel:nth-child(227), .pixel:nth-child(228), .pixel:nth-child(229), .pixel:nth-child(230), .pixel:nth-child(235), .pixel:nth-child(236), .pixel:nth-child(237), .pixel:nth-child(238), .pixel:nth-child(239), .pixel:nth-child(240),
+.pixel:nth-child(240), .pixel:nth-child(241), .pixel:nth-child(242), .pixel:nth-child(243), .pixel:nth-child(244), .pixel:nth-child(245), .pixel:nth-child(246), .pixel:nth-child(251), .pixel:nth-child(252), .pixel:nth-child(253), .pixel:nth-child(254), .pixel:nth-child(255), .pixel:nth-child(256) {
+    background-color: transparent;
+}

@@ -1,0 +1,75 @@
+:root {
+    --main-fonts: 'Ubuntu', 'Open Sans', 'Helvetica Neue', sans-serif;
+    --body-fonts: 'Raleway', sans-serif;
+    --bg1: #4A417B; /* toriel-purple-darker */
+    --acc1: #5656C7; /* toriel-purple-bluer */
+    --bg2: #FFE366; /* pap-yellow */
+    --acc2: #FFE987; /* pap-yellow-lighter */
+    --ct1: #FDFDFD; /* bone-white */
+    --ct2: #26210F /* pap-yellow-black */
+}
+
+body {
+    font-family: var(--body-fonts);
+    background-color: var(--bg1);
+    color: var(--ct1)!important;
+    height: 100%
+}
+
+.navbar {
+    background-color: var(--acc1);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.11), 
+    0 2px 2px rgba(0,0,0,0.11), 
+    0 4px 4px rgba(0,0,0,0.11), 
+    0 8px 8px rgba(0,0,0,0.11), 
+    0 16px 16px rgba(0,0,0,0.11), 
+    0 32px 32px rgba(0,0,0,0.11);
+}
+
+.navbar-item {
+    transition: box-shadow 0.2s, background-color 0.15s ease;
+    font-family: var(--main-fonts);
+    color:var(--ct1)
+}
+
+.navbar-item:hover {
+    background-color: var(--bg1)!important;
+    color: var(--ct1)!important;
+    box-shadow: inset 0 11px 11px rgba(0,0,0,0.11), 
+    inset 0 12px 12px rgba(0,0,0,0.11), 
+    inset 0 14px 14px rgba(0,0,0,0.11)
+}
+
+.navbar-item > .button {
+    background-color: transparent;
+    color: var(--ct1);
+    border: none;
+}
+
+.title, .subtitle {
+    color: var(--ct1)!important;
+}
+
+.box {
+    background-color: var(--bg2);
+    transition: 100ms ease;
+}
+
+.box:hover {
+    transform: scale(1.05);
+}
+
+.footer {
+    background-color: var(--acc1);
+    margin-top: 5rem;
+    box-shadow: 0 -1px 1px rgba(0,0,0,0.11), 
+    0 -2px 2px rgba(0,0,0,0.11), 
+    0 -4px 4px rgba(0,0,0,0.11), 
+    0 -6px 8px rgba(0,0,0,0.11),
+    0 -8px 16px rgba(0,0,0,0.11);
+}
+
+.subtitle {
+    opacity: 0.5;
+}
+
