@@ -23,10 +23,8 @@ sessionRouter.post('/', async (req, res) => {
             throw new Error('Invalid credentials')
         }
         req.session.currentUser = foundUser
-        res.redirect('/')
-        // res.send(`hoi hoi11! ${foundUser}`)
+        res.redirect('/') 
     } catch (error) {
-        // res.render('error.ejs', { error })
         res.send(`hoi ${error}`)
     }
 })

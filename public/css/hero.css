@@ -14,6 +14,10 @@
     font-size: 2rem;
 }
 
+.hero {
+    background-color: var(--bg1);
+}
+
 .hero-body > .title {
     font-family: var(--body-fonts);
 }
@@ -22,8 +26,13 @@
     font-family: var(--main-fonts);
 }
 
-.hero {
-    background-color: var(--bg1);
+.is-papyrus {
+    background-color: var(--bg2);
+}
+
+.is-papyrus > .hero-body > .title,
+.is-papyrus > .hero-body > .subtitle {
+    color: var(--ct2)!important;
 }
 
 .heart-container {

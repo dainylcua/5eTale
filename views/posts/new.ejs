@@ -1,0 +1,79 @@
+<%- include('../partials/head.ejs') %>
+<%- include('../partials/nav.ejs') %>
+
+
+<div class="container">
+    <div class="columns">
+            <div class="column">
+                <div class="box">
+                    <h1 class="title" style="color:var(--ct2)!important">Create a Post</h1>
+                    
+                    <form action="/posts" method="post">
+                        <div class="field">
+                            <label class="label has-text-weight-bold">Post Layout</label>
+                            <div class="control">
+                                <div class="select">
+                                    <select name="contentType" id="contentType">
+                                        <option value="none" selected disabled hidden></option>
+                                        <option value="general">General</option>
+                                        <option value="item">Item</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- General post layout -->
+                        <div class="switch-container" id="gen-layout" style="display:none"> 
+                            <div class="field">
+                                <label class="label has-text-weight-bold">Post Title</label>
+                                <div class="control is-expanded has-icons-left">
+                                    <input type="text" class="input">
+                                    <span class="icon is-small is-left">
+                                        <i class="fa-solid fa-heading"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label class="label has-text-weight-bold">Homebrew Title</label>
+                                <div class="control is-expanded has-icons-left">
+                                    <input type="text" class="input">
+                                    <span class="icon is-small is-left">
+                                        <i class="fa-solid fa-heading"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label class="label has-text-weight-bold">Homebrew Description</label>
+                                <textarea name="" id="" cols="30" rows="10" class="textarea"></textarea>
+                            </div>
+                            
+                            <input type="submit" class="button" value="Post Homebrew">
+                        </div>
+
+                        <!-- Item post layout -->
+                        <div class="switch-container" id="item-layout" style="display:none"> 
+                            <div class="field">
+                                <label class="label has-text-weight-bold">Post Title</label>
+                                <div class="control is-expanded has-icons-left">
+                                    <input type="text" class="input">
+                                    <span class="icon is-small is-left">
+                                        <i class="fa-solid fa-heading"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <input type="submit" class="button" value="Post Homebrew">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+    </div>
+</div>
+
+
+
+
+<%- include('../partials/footer.ejs') %>

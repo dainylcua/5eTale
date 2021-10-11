@@ -8,7 +8,18 @@ const Post = require('../models/post.js')
 ///////
 // Controller Middleware
 ////
-
+const isUser = (req, res, next) => {
+    try {
+        if (!req.session.currentUser) {
+            throw new Error('Please log in to continue.')
+        }       
+        next()
+    } catch (error) {
+        res.render('error.ejs', { 
+            currentUser: req.session.currentUser,
+            error})
+    }
+}
 
 ///////
 // Controller Routes
@@ -22,11 +33,13 @@ postRouter.get('/', async (req,res) => {
 })
 
 // New
-postRouter.get('/create', async (req, res) => {
+postRouter.get('/create', isUser, async (req, res) => {
     try {
-        
+        res.render('posts/new.ejs', {
+            currentUser: req.session.currentUser
+        })
     } catch (error) {
-        
+        res.render(`hoi ${error}`)
     }
 })
 

@@ -50,13 +50,12 @@ body {
     color: var(--ct1)!important;
 }
 
-.box {
-    background-color: var(--bg2);
-    transition: 100ms ease;
+.container {
+    margin-top: 5rem;
 }
 
-.box:hover {
-    transform: scale(1.05);
+.box {
+    background-color: var(--bg2);
 }
 
 .footer {
