@@ -50,12 +50,12 @@ app.use(session({
 ////
 const userController = require('./controllers/users.js')
 const sessionController = require('./controllers/sessions.js')
-const itemController = require('./controllers/items.js')
+const postController = require('./controllers/posts.js')
 
 
 app.use('/users', userController)
 app.use('/sessions', sessionController)
-app.use('/items', itemController)
+app.use('/posts', postController)
 
 
 app.get('/', (req, res) => {
