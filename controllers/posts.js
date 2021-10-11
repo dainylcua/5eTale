@@ -21,6 +21,27 @@ const isUser = (req, res, next) => {
     }
 }
 
+const isSameUser = (req, res, next) => {
+    
+}
+
+const dataSanitize = (req, res, next) => {
+    const postObj = {}
+    postObj.name = req.body.postName
+    postObj.author = req.session.currentUser._id
+    postObj.contentType = req.body.contentType
+
+    const contObj = {}
+    switch(req.body.contentType) {
+        case 'general':
+            contObj.name = req.body.genName
+            contObj.features = req.body.genFeatures
+            break
+    }
+    postObj.content = contObj
+    return postObj
+}
+
 ///////
 // Controller Routes
 ////
@@ -33,7 +54,7 @@ postRouter.get('/', async (req,res) => {
 })
 
 // New
-postRouter.get('/create', isUser, async (req, res) => {
+postRouter.get('/create', isUser, (req, res) => {
     try {
         res.render('posts/new.ejs', {
             currentUser: req.session.currentUser
@@ -55,8 +76,14 @@ postRouter.put('/', async (req, res) => {
 
 
 // Create
-postRouter.post('/', async (req, res) => {
-
+postRouter.post('/', async (req, res, next) => {
+    try {
+        const postObj = dataSanitize(req, res, next)
+        const newPost = await Post.create(postObj)
+        res.send(newPost)
+    } catch (error) {
+        res.send(`error on new post create ${error}`)
+    }
 })
 
 
