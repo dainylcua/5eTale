@@ -9,6 +9,10 @@
     --ct2: #26210F /* pap-yellow-black */
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: var(--body-fonts);
     background-color: var(--bg1);

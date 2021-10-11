@@ -12,17 +12,18 @@ const isUser = (req, res, next) => {
     try {
         if (!req.session.currentUser) {
             throw new Error('Please log in to continue.')
-        }       
+        }
         next()
     } catch (error) {
-        res.render('error.ejs', { 
+        res.render('error.ejs', {
             currentUser: req.session.currentUser,
-            error})
+            error
+        })
     }
 }
 
 const isSameUser = (req, res, next) => {
-    
+
 }
 
 const dataSanitize = (req, res, next) => {
@@ -32,7 +33,7 @@ const dataSanitize = (req, res, next) => {
     postObj.contentType = req.body.contentType
 
     const contObj = {}
-    switch(req.body.contentType) {
+    switch (req.body.contentType) {
         case 'general':
             contObj.name = req.body.genName
             contObj.features = req.body.genFeatures
@@ -49,8 +50,16 @@ const dataSanitize = (req, res, next) => {
 // Remember INDUCES
 
 // Index
-postRouter.get('/', async (req,res) => {
-
+postRouter.get('/', async (req, res) => {
+    try {
+        const postList = await Post.find({})
+        res.send(postList)
+    } catch (error) {
+        res.render('error.ejs', {
+            currentUser: req.session.currentUser,
+            error
+        })
+    }
 })
 
 // New
@@ -60,7 +69,10 @@ postRouter.get('/create', isUser, (req, res) => {
             currentUser: req.session.currentUser
         })
     } catch (error) {
-        res.render(`hoi ${error}`)
+        res.render('error.ejs', {
+            currentUser: req.session.currentUser,
+            error
+        })
     }
 })
 
@@ -80,9 +92,12 @@ postRouter.post('/', async (req, res, next) => {
     try {
         const postObj = dataSanitize(req, res, next)
         const newPost = await Post.create(postObj)
-        res.send(newPost)
+        res.redirect('/posts')
     } catch (error) {
-        res.send(`error on new post create ${error}`)
+        res.render('error.ejs', {
+            currentUser: req.session.currentUser,
+            error
+        })
     }
 })
 
