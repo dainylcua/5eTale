@@ -7,11 +7,11 @@
 }
 
 .is-size-huge {
-    font-size: 15rem;
+    font-size: 6rem;
 }
 
 .is-size-big {
-    font-size: 4rem;
+    font-size: 2rem;
 }
 
 .hero-body > .title {
@@ -32,11 +32,23 @@
     z-index: -1;
 }
 
-.heart-holder {
-    scale: 2;
-    position: relative;
-    opacity: 0.2;
-    right: -5rem;
+@media screen and (min-width: 1024px) {
+    .heart-holder {
+        scale: 2;
+        position: absolute;
+        opacity: 0.2;
+        left: 67rem;
+        top: 15rem;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .heart-holder {
+        scale: 1.5;
+        position: absolute;
+        opacity: 0.2;
+        right: -5rem;
+    }
 }
 
 .pixel {
