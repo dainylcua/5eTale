@@ -2,23 +2,33 @@
 <%- include('../partials/nav.ejs') %>
 
 <div class="container">
-    <div class="columns">
+    <% posts.forEach((post, idx) => { %>
+        <% if(!(idx % 3)) { %>
+            <div class="columns"> 
+        <% } %>
         <div class="column is-4">
-            <div class="box">
-
+                <a href="/posts/<%=post._id%>">
+                <div class="card">
+                    <div class="card-content pb-0">
+                        <div class="title">
+                            <%=post.name%>
+                        </div>
+                        <div class="subtitle">
+                            <%=post.author.username%>
+                        </div>
+                    </div>
+                    <footer class="card-footer mt-0">
+                        <div class="card-footer-item">
+                            <%=post.contentType%>
+                        </div>
+                    </footer>
+                </div>
+            </a>
             </div>
-        </div>
-        <div class="column is-4">
-            <div class="box">
-
-            </div>
-        </div>
-        <div class="column is-4">
-            <div class="box">
-
-            </div>
-        </div>
-    </div>
+        <% if(((idx % 3) === 2) || idx === posts.length-1) { %>
+            </div> 
+        <% } %>
+    <% }) %>
 </div>
 
 <%- include('../partials/footer.ejs') %>

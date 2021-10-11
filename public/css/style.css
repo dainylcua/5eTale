@@ -50,7 +50,7 @@ body {
     border: none;
 }
 
-.title, .subtitle {
+.hero > .title, .hero > .subtitle {
     color: var(--ct1)!important;
 }
 
@@ -60,6 +60,19 @@ body {
 
 .box {
     background-color: var(--bg2);
+}
+
+.card {
+    background-color: var(--bg2);
+}
+
+.card-content > .title {
+    color: var(--ct2);
+}
+
+.card-footer {
+    border-top: none;
+    font-style: italic;
 }
 
 .footer {

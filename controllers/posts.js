@@ -52,8 +52,11 @@ const dataSanitize = (req, res, next) => {
 // Index
 postRouter.get('/', async (req, res) => {
     try {
-        const postList = await Post.find({})
-        res.send(postList)
+        const postList = await Post.find({}).populate('author', 'username')
+        res.render('posts/index.ejs', {
+            currentUser: req.session.currentUser,
+            posts: postList
+        })
     } catch (error) {
         res.render('error.ejs', {
             currentUser: req.session.currentUser,
@@ -91,7 +94,7 @@ postRouter.put('/', async (req, res) => {
 postRouter.post('/', async (req, res, next) => {
     try {
         const postObj = dataSanitize(req, res, next)
-        const newPost = await Post.create(postObj)
+        await Post.create(postObj)
         res.redirect('/posts')
     } catch (error) {
         res.render('error.ejs', {
@@ -109,7 +112,18 @@ postRouter.get('/:id/edit', async (req, res) => {
 
 // Show
 postRouter.get('/:id', async (req, res) => {
-
+    try {
+        const foundPost = await Post.findById(req.params.id)
+        res.render('posts/show.ejs', {
+            currentUser: req.session.currentUser,
+            post: foundPost
+        })
+    } catch (error) {
+        res.render('error.ejs', {
+            currentUser: req.session.currentUser,
+            error
+        })
+    }
 })
 
 ///////
