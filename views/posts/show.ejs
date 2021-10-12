@@ -6,7 +6,7 @@
         <div class="level">
             <div class="level-item has-text-centered">
                 <div>
-                    <div class="heading">Title</div>
+                    <div class="heading">Post Title</div>
                     <div class="title"><%=post.name%></div>
                 </div>
             </div>
@@ -25,12 +25,12 @@
         </div>
     </div>
 
-    <!-- Generic homebrew type only -->
+    <!-- TODO: Generic homebrew type only -->
     <div class="box">
         <div class="columns">
             <div class="column is-12">
                 <h1 class="title mb-4">
-                    Description:
+                    <%=post.content.name%>:
                 </h1>
                 <%=post.content.features%>
             </div>

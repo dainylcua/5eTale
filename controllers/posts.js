@@ -84,7 +84,7 @@ postRouter.get('/create', isUser, (req, res) => {
 // Delete
 postRouter.delete('/:id', async (req, res) => {
     try {
-        const deletedPost = await Post.findByIdAndDelete(req.params.id)
+        await Post.findByIdAndDelete(req.params.id)
         res.redirect('/posts')
     } catch (error) {
         res.render('error.ejs', {
@@ -95,8 +95,23 @@ postRouter.delete('/:id', async (req, res) => {
 })
 
 // Update
-postRouter.put('/', async (req, res) => {
-
+postRouter.put('/:id', async (req, res, next) => {
+    try {
+        dataSanitize(req, res, next)
+        // TODO: General only
+        await Post.findByIdAndUpdate(
+            req.params.id,
+            {
+                'content.name': req.body.genName,
+                'content.features': req.body.genFeatures
+            })
+        res.redirect(`/posts/${req.params.id}`)
+    } catch (error) {
+        res.render('error.ejs', {
+            currentUser: req.session.currentUser,
+            error
+        })
+    }
 })
 
 
@@ -117,7 +132,18 @@ postRouter.post('/', async (req, res, next) => {
 
 // Edit
 postRouter.get('/:id/edit', async (req, res) => {
-
+    try {
+        const foundPost = await Post.findById(req.params.id)
+        res.render('posts/edit.ejs', {
+            currentUser: req.session.currentUser,
+            post: foundPost
+        })
+    } catch (error) {
+        res.render('error.ejs', {
+            currentUser: req.session.currentUser,
+            error
+        })
+    }
 })
 
 // Show

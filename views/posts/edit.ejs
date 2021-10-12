@@ -1,0 +1,42 @@
+<%- include('../partials/head.ejs') %>
+<%- include('../partials/nav.ejs') %>
+
+
+<div class="container">
+    <div class="columns">
+            <div class="column">
+                <div class="box">
+                    <h1 class="title" style="color:var(--ct2)!important">Edit Post</h1>
+                    
+                    <form action="/posts/<%=post._id%>?_method=PUT" method="POST">
+                        <% switch(post.contentType) {
+                            case 'general': %>
+                            <div class="switch-container" id="gen-layout"> 
+                                <div class="field">
+                                    <label class="label has-text-weight-bold">Homebrew Title</label>
+                                    <div class="control is-expanded has-icons-left">
+                                        <input name="genName" type="text" class="input" value="<%=post.content.name%>">
+                                        <span class="icon is-small is-left">
+                                            <i class="fa-solid fa-heading"></i>
+                                        </span>
+                                    </div>
+                                </div>
+    
+                                <div class="field">
+                                    <label class="label has-text-weight-bold">Homebrew Description</label>
+                                    <textarea name="genFeatures" id="" cols="30" rows="10" class="textarea"><%=post.content.features%></textarea>
+                                </div>
+                                <input type="submit" class="button" value="Post Edit">
+                            </div>
+                            <% break
+                        } %>
+                    </form>
+                </div>
+            </div>
+    </div>
+</div>
+
+
+
+
+<%- include('../partials/footer.ejs') %>
