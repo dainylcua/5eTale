@@ -82,7 +82,7 @@ postRouter.get('/create', isUser, (req, res) => {
 })
 
 // Delete
-postRouter.delete('/:id', async (req, res) => {
+postRouter.delete('/:id', isUser, async (req, res) => {
     try {
         await Post.findByIdAndDelete(req.params.id)
         res.redirect('/posts')
@@ -95,10 +95,10 @@ postRouter.delete('/:id', async (req, res) => {
 })
 
 // Update
-postRouter.put('/:id', async (req, res, next) => {
+postRouter.put('/:id', isUser, async (req, res, next) => {
     try {
         dataSanitize(req, res, next)
-        // TODO: General only
+        // TODO: General only for now, update for all types
         await Post.findByIdAndUpdate(
             req.params.id,
             {
@@ -116,7 +116,7 @@ postRouter.put('/:id', async (req, res, next) => {
 
 
 // Create
-postRouter.post('/', async (req, res, next) => {
+postRouter.post('/', isUser, async (req, res, next) => {
     try {
         const postObj = dataSanitize(req, res, next)
         await Post.create(postObj)
@@ -131,7 +131,7 @@ postRouter.post('/', async (req, res, next) => {
 
 
 // Edit
-postRouter.get('/:id/edit', async (req, res) => {
+postRouter.get('/:id/edit', isUser, async (req, res) => {
     try {
         const foundPost = await Post.findById(req.params.id)
         res.render('posts/edit.ejs', {
