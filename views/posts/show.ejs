@@ -25,6 +25,7 @@
         </div>
     </div>
 
+    <!-- Generic homebrew type only -->
     <div class="box">
         <div class="columns">
             <div class="column is-12">
@@ -35,6 +36,19 @@
             </div>
         </div>
     </div>
+
+    <% if(sameUser) { %>
+    <div class="box">
+        <div class="columns">
+            <div class="column is-6">
+                <button class="button is-fullwidth" id="delete" data-id="<%=post._id%>">Delete Post</button>
+            </div>
+            <div class="column is-6">
+                <a class="button is-fullwidth" href="/posts/<%=post._id%>/edit">Edit Post</a>
+            </div>
+        </div>
+    </div>
+    <% } %>
 </div>
 
 

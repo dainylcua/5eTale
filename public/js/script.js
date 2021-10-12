@@ -13,3 +13,13 @@ if (window.location.pathname == '/posts/create') {
         }
     })
 }
+
+if (!!$('#delete').length) {
+    const id = $('#delete').attr('data-id')
+    $('#delete').on('click', () => {
+        $.ajax({
+            url: `/posts/${id}`,
+            type: 'DELETE',
+        }).then(() => window.location.href = '/posts')
+    })
+}

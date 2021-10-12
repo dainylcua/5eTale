@@ -24,9 +24,7 @@ const isUser = (req, res, next) => {
 
 const isSameUser = (req, res, next, post) => {
     if(!req.session.currentUser) return false
-    console.log(req.session.currentUser._id)
-    console.log(post.author._id)
-    if(req.session.currentUser._id === post.author._id) return true
+    if(req.session.currentUser._id == post.author._id) return true
     return false
 }
 
@@ -84,8 +82,16 @@ postRouter.get('/create', isUser, (req, res) => {
 })
 
 // Delete
-postRouter.delete('/', async (req, res) => {
-
+postRouter.delete('/:id', async (req, res) => {
+    try {
+        const deletedPost = await Post.findByIdAndDelete(req.params.id)
+        res.redirect('/posts')
+    } catch (error) {
+        res.render('error.ejs', {
+            currentUser: req.session.currentUser,
+            error
+        })
+    }
 })
 
 // Update
