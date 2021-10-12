@@ -30,15 +30,44 @@ const isSameUser = (req, res, next, post) => {
 
 const dataSanitize = (req, res, next) => {
     const postObj = {}
-    postObj.name = req.body.postName
+    postObj.name = req.body.name
     postObj.author = req.session.currentUser._id
     postObj.contentType = req.body.contentType
+    postObj.description = req.body.description
 
     const contObj = {}
     switch (req.body.contentType) {
         case 'general':
             contObj.name = req.body.genName
+            contObj.description = req.body.genDescription
             contObj.features = req.body.genFeatures
+            break
+        case 'item':
+            contObj.name = req.body.itemName
+            contObj.description = req.body.itemDescription
+            contObj.itemType = req.body.itemType
+            contObj.rarity = req.body.itemRarity
+            contObj.wondrous = !!req.body.itemWondrous
+            // Can condense this by changing itemType to a number
+            switch(req.body.itemType) {
+                case 'offensive':
+                    contObj.damage = req.body.itemDamage
+                    contObj.effects = req.body.itemEffects[0]
+                    contObj.weight = req.body.itemWeight[0]
+                    contObj.value = req.body.itemValue[0]
+                    break
+                case 'defensive':
+                    contObj.ac = req.body.itemAc
+                    contObj.effects = req.body.itemEffects[1]
+                    contObj.weight = req.body.itemWeight[1]
+                    contObj.value = req.body.itemValue[1]
+                    break
+                case 'misc':
+                    contObj.effects = req.body.itemEffects[2]
+                    contObj.weight = req.body.itemWeight[2]
+                    contObj.value = req.body.itemValue[2]
+                    break
+            }
             break
     }
     postObj.content = contObj

@@ -6,10 +6,11 @@
     <div class="columns">
             <div class="column">
                 <div class="box">
-                    <h1 class="title" style="color:var(--ct2)!important">Edit Post</h1>
+                    <h1 class="title" style="color:var(--ct2)">Edit Post</h1>
                     
                     <form action="/posts/<%=post._id%>?_method=PUT" method="POST">
                         <% switch(post.contentType) {
+                            // Changes edit layout based on type of post content
                             case 'general': %>
                             <div class="switch-container" id="gen-layout"> 
                                 <div class="field">

@@ -10,6 +10,7 @@ const postSchema = new Schema ({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
+    description: {type: String, default: ''},
     contentType: {type: String, required: true},
     content: {type: Object, required: true},
     favorites: {type: Number, default: 0}

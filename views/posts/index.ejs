@@ -28,7 +28,11 @@
                     </div>
                     <footer class="card-footer mt-0">
                         <div class="card-footer-item">
-                            <%=post.contentType%>
+                            <% if (post.contentType == 'item') { %>
+                                <%=`${post.contentType}, ${post.content.itemType}`%>
+                            <% } else { %>
+                                <%=post.contentType%>
+                            <% } %>
                         </div>
                     </footer>
                 </div>
