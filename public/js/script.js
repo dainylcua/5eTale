@@ -17,10 +17,10 @@ if (window.location.pathname == '/posts/create') {
         $('.item-container').css('display', 'none')
         const opt = $('#item-type>option:selected').val()
         switch(opt) {
-            case 'off':
+            case 'offensive':
                 $('#off-layout').toggle()
                 break
-            case 'def':
+            case 'defensive':
                 $('#def-layout').toggle()
                 break
             case 'misc':

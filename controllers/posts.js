@@ -48,6 +48,7 @@ const dataSanitize = (req, res, next) => {
             contObj.itemType = req.body.itemType
             contObj.rarity = req.body.itemRarity
             contObj.wondrous = !!req.body.itemWondrous
+            contObj.attunement = !!req.body.itemAttune
             // Can condense this by changing itemType to a number
             switch(req.body.itemType) {
                 case 'offensive':
