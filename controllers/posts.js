@@ -22,8 +22,12 @@ const isUser = (req, res, next) => {
     }
 }
 
-const isSameUser = (req, res, next) => {
-
+const isSameUser = (req, res, next, post) => {
+    if(!req.session.currentUser) return false
+    console.log(req.session.currentUser._id)
+    console.log(post.author._id)
+    if(req.session.currentUser._id === post.author._id) return true
+    return false
 }
 
 const dataSanitize = (req, res, next) => {
@@ -111,12 +115,14 @@ postRouter.get('/:id/edit', async (req, res) => {
 })
 
 // Show
-postRouter.get('/:id', async (req, res) => {
+postRouter.get('/:id', async (req, res, next) => {
     try {
-        const foundPost = await Post.findById(req.params.id)
+        const foundPost = await Post.findById(req.params.id).populate('author', 'username')
+        const sameUser = isSameUser(req, res, next, foundPost)
         res.render('posts/show.ejs', {
             currentUser: req.session.currentUser,
-            post: foundPost
+            post: foundPost,
+            sameUser
         })
     } catch (error) {
         res.render('error.ejs', {

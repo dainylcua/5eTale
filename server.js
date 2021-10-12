@@ -5,6 +5,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const session = require('express-session')
 const methOv = require('method-override')
+const morgan = require('morgan')
 
 
 // Config .env
@@ -44,6 +45,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }))
+app.use(morgan('dev'))
 
 ///////
 // Routes

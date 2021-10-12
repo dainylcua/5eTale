@@ -12,7 +12,8 @@ const postSchema = new Schema ({
     },
     contentType: {type: String, required: true},
     content: {type: Object, required: true},
-})
+    favorites: {type: Number, default: 0}
+}, {timestamps: true})
 
 ///////
 // Schema to Model and Export

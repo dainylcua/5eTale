@@ -8,10 +8,17 @@
 
 .is-size-huge {
     font-size: 6rem;
+    color: var(--ct1);
 }
 
 .is-size-big {
     font-size: 2rem;
+    color: var(--ct1);
+}
+
+.hero > .title, .hero > .subtitle,
+.hero-body > .title, .hero-body > .subtitle {
+    color: var(--ct1);
 }
 
 .hero {
@@ -20,10 +27,13 @@
 
 .hero-body > .title {
     font-family: var(--body-fonts);
+    color: var(--ct1);
 }
 
 .hero-body > .subtitle {
     font-family: var(--main-fonts);
+    color: var(--ct1);
+
 }
 
 .is-papyrus {

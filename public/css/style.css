@@ -50,10 +50,6 @@ body {
     border: none;
 }
 
-.hero > .title, .hero > .subtitle {
-    color: var(--ct1)!important;
-}
-
 .container {
     margin-top: 5rem;
 }

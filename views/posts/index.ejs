@@ -2,6 +2,15 @@
 <%- include('../partials/nav.ejs') %>
 
 <div class="container">
+    <% if(posts.length === 0) { %>
+        <div class="columns">
+            <div class="column">
+                <div class="box">Nothing's here... try making an item!</div>
+            </div>
+        </div>
+    <% } %>
+
+
     <% posts.forEach((post, idx) => { %>
         <% if(!(idx % 3)) { %>
             <div class="columns"> 
