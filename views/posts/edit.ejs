@@ -4,17 +4,16 @@
 
 <div class="container">
     <div class="columns">
-            <div class="column">
+            <div class="column is-offset-3 is-6">
                 <div class="box">
                     <h1 class="title" style="color:var(--ct2)">Edit Post</h1>
                     
                     <form action="/posts/<%=post._id%>?_method=PUT" method="POST" autocomplete="off">
                         <div class="field">
                             <label class="label has-text-weight-bold">Post Description</label>
-                            <textarea name="description" id="" cols="30" rows="10" class="textarea"></textarea>
+                            <textarea name="description" id="" cols="30" rows="10" class="textarea"><%=post.description%></textarea>
                         </div>
                         <% switch(post.contentType) {
-                            // Changes edit layout based on type of post content
                             case 'general': %>
                             <div class="switch-container" id="gen-layout"> 
                                 <div class="field">
@@ -22,7 +21,7 @@
                                     <div class="control is-expanded has-icons-left">
                                         <input name="genName" type="text" class="input" value="<%=post.content.name%>">
                                         <span class="icon is-small is-left">
-                                            <i class="fa-solid fa-heading"></i>
+                                            <i class="fa-solid fa-pencil"></i>
                                         </span>
                                     </div>
                                 </div>
@@ -47,7 +46,7 @@
                                 <div class="control is-expanded has-icons-left">
                                     <input name="itemName" type="text" class="input" value="<%=post.content.description%>">
                                     <span class="icon is-small is-left">
-                                        <i class="fa-solid fa-heading"></i>
+                                        <i class="fa-solid fa-pencil"></i>
                                     </span>
                                 </div>
                             </div>
@@ -102,14 +101,13 @@
                                 </div>
                             </div>
 
-                            // Item specificity layouts
                             <div class="item-container" id="off-layout" style="display:none">
                                 <div class="field">
                                     <label class="label has-text-weight-bold">Weapon Damage</label>
                                     <div class="control is-expanded has-icons-left">
                                         <input name="itemDamage" type="text" class="input" value="<%=post.content.damage%>">
                                         <span class="icon is-small is-left">
-                                            <i class="fa-solid fa-heading"></i>
+                                            <i class="fa-solid fa-khanda"></i>
                                         </span>
                                     </div>
                                 </div>
@@ -124,7 +122,7 @@
                                     <div class="control is-expanded has-icons-left">
                                         <input name="itemWeight" type="number" class="input" value="<%=post.content.weight%>">
                                         <span class="icon is-small is-left">
-                                            <i class="fa-solid fa-heading"></i>
+                                            <i class="fa-solid fa-weight-hanging"></i>
                                         </span>
                                     </div>
                                 </div>
@@ -134,7 +132,7 @@
                                     <div class="control is-expanded has-icons-left">
                                         <input name="itemValue" type="text" class="input" value="<%=post.content.value%>">
                                         <span class="icon is-small is-left">
-                                            <i class="fa-solid fa-heading"></i>
+                                            <i class="fa-solid fa-coins"></i>
                                         </span>
                                     </div>
                                 </div>
@@ -151,7 +149,7 @@
                                     <div class="control is-expanded has-icons-left">
                                         <input name="itemAc" type="text" class="input" value="<%=post.content.ac%>">
                                         <span class="icon is-small is-left">
-                                            <i class="fa-solid fa-heading"></i>
+                                            <i class="fa-solid fa-shield-blank"></i>
                                         </span>
                                     </div>
                                 </div>
@@ -166,7 +164,7 @@
                                     <div class="control is-expanded has-icons-left">
                                         <input name="itemWeight" type="number" class="input" value="<%=post.content.weight%>">
                                         <span class="icon is-small is-left">
-                                            <i class="fa-solid fa-heading"></i>
+                                            <i class="fa-solid fa-weight-hanging"></i>
                                         </span>
                                     </div>
                                 </div>
@@ -176,7 +174,7 @@
                                     <div class="control is-expanded has-icons-left">
                                         <input name="itemValue" type="text" class="input" value="<%=post.content.value%>">
                                         <span class="icon is-small is-left">
-                                            <i class="fa-solid fa-heading"></i>
+                                            <i class="fa-solid fa-coins"></i>
                                         </span>
                                     </div>
                                 </div>
@@ -198,7 +196,7 @@
                                     <div class="control is-expanded has-icons-left">
                                         <input name="itemWeight" type="number" class="input" value="<%=post.content.weight%>">
                                         <span class="icon is-small is-left">
-                                            <i class="fa-solid fa-heading"></i>
+                                            <i class="fa-solid fa-weight-hanging"></i>
                                         </span>
                                     </div>
                                 </div>
@@ -208,7 +206,7 @@
                                     <div class="control is-expanded has-icons-left">
                                         <input name="itemValue" type="text" class="input" value="<%=post.content.value%>">
                                         <span class="icon is-small is-left">
-                                            <i class="fa-solid fa-heading"></i>
+                                            <i class="fa-solid fa-coins"></i>
                                         </span>
                                     </div>
                                 </div>

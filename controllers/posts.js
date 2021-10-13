@@ -5,6 +5,7 @@ const express = require('express')
 const postRouter = express.Router()
 const Post = require('../models/post.js')
 const postSeed = require('../models/postSeed.js')
+const User = require('../models/user.js')
 
 ///////
 // Controller Middleware
@@ -24,8 +25,8 @@ const isUser = (req, res, next) => {
 }
 
 const isSameUser = (req, res, next, post) => {
-    if(!req.session.currentUser) return false
-    if(req.session.currentUser._id == post.author._id) return true
+    if (!req.session.currentUser) return false
+    if (req.session.currentUser._id == post.author._id) return true
     return false
 }
 
@@ -44,8 +45,8 @@ const isAdminStrict = (req, res, next) => {
 }
 
 const isAdminValue = (req, res, next) => {
-    if(!req.session.currentUser) return false
-    if(req.session.currentUser.admin) return true
+    if (!req.session.currentUser) return false
+    if (req.session.currentUser.admin) return true
     return false
 }
 
@@ -71,7 +72,7 @@ const dataSanitize = (req, res, next) => {
             contObj.wondrous = !!req.body.itemWondrous
             contObj.attunement = !!req.body.itemAttune
             // Can condense this by changing itemType to a number
-            switch(req.body.itemType) {
+            switch (req.body.itemType) {
                 case 'offensive':
                     contObj.damage = req.body.itemDamage
                     contObj.effects = req.body.itemEffects[0]
@@ -106,7 +107,9 @@ const dataSanitize = (req, res, next) => {
 // Seed route
 postRouter.post('/seed', isAdminStrict, async (req, res, next) => {
     try {
-        await Post.create(postSeed, {author: req.session.currentUser._id})
+        await Post.create(postSeed, {
+            author: req.session.currentUser._id
+        })
         res.redirect('/posts')
     } catch (error) {
         res.render('error.ejs', {
@@ -179,8 +182,7 @@ postRouter.put('/:id', isUser, async (req, res, next) => {
         dataSanitize(req, res, next)
         // TODO: General only for now, update for all types
         await Post.findByIdAndUpdate(
-            req.params.id,
-            {
+            req.params.id, {
                 'content.name': req.body.genName,
                 'content.features': req.body.genFeatures
             })
@@ -198,7 +200,13 @@ postRouter.put('/:id', isUser, async (req, res, next) => {
 postRouter.post('/', isUser, async (req, res, next) => {
     try {
         const postObj = dataSanitize(req, res, next)
-        await Post.create(postObj)
+        const createdPost = await Post.create(postObj)
+        await User.findByIdAndUpdate(req.session.currentUser._id, {
+            $push: {
+                'favoriteIds': createdPost._id
+            }
+        })
+
         res.redirect('/posts')
     } catch (error) {
         res.render('error.ejs', {

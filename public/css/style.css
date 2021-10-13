@@ -151,6 +151,5 @@ body {
 .dashtab.is-active > a,
 .dashtab.is-active > a:hover {
     color: var(--bg2)!important;
-    border-bottom-color: var(--acc1)!important;
 }
 

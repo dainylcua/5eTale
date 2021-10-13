@@ -76,13 +76,13 @@ app.use('/posts', postController)
 
 app.get('/', (req, res) => {
     res.render('index.ejs', {
-        currentUser: req.session.currentUser,
+        currentUser: req.session.currentUser
     })
 })
 
 app.get('/dashboard', isUser, (req, res) => {
     res.render('dashboard.ejs', {
-        currentUser: req.session.currentUser,
+        currentUser: req.session.currentUser
     })
 })
 
