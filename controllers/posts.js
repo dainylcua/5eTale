@@ -179,13 +179,13 @@ postRouter.delete('/:id', isUser, async (req, res) => {
 // Update
 postRouter.put('/:id', isUser, async (req, res, next) => {
     try {
-        dataSanitize(req, res, next)
-        // TODO: General only for now, update for all types
+        const postToUpdate = await Post.findById(req.params.id)
+        req.body.contentType = postToUpdate.contentType
+        const updatedObject = dataSanitize(req, res, next)
+        updatedObject.author = postToUpdate.author
         await Post.findByIdAndUpdate(
-            req.params.id, {
-                'content.name': req.body.genName,
-                'content.features': req.body.genFeatures
-            })
+            req.params.id, updatedObject
+            )
         res.redirect(`/posts/${req.params.id}`)
     } catch (error) {
         res.render('error.ejs', {
