@@ -29,6 +29,20 @@ const isSameUser = (req, res, next, post) => {
     return false
 }
 
+const isAdmin = (req, res, next) => {
+    try {
+        if (!req.session.currentUser) {
+            throw new Error('Administrator operation only.')
+        }
+        next()
+    } catch (error) {
+        res.render('error.ejs', {
+            currentUser: req.session.currentUser,
+            error
+        })
+    }
+}
+
 const dataSanitize = (req, res, next) => {
     const postObj = {}
     postObj.name = req.body.name
@@ -76,6 +90,7 @@ const dataSanitize = (req, res, next) => {
     return postObj
 }
 
+
 ///////
 // Controller Routes
 ////
@@ -83,7 +98,7 @@ const dataSanitize = (req, res, next) => {
 // Remember INDUCES
 
 // Seed route
-postRouter.post('/seed', isUser, async (req, res, next) => {
+postRouter.post('/seed', isUser, isAdmin, async (req, res, next) => {
     try {
         await Post.create(postSeed, {author: req.session.currentUser._id})
         res.redirect('/posts')
@@ -125,6 +140,19 @@ postRouter.get('/create', isUser, (req, res) => {
     }
 })
 
+// Delete ALL
+postRouter.delete('/all', isUser, isAdmin, async (req, res) => {
+    try {
+        await Post.deleteMany({})
+        window.location.href = '/posts'
+    } catch (error) {
+        res.render('error.ejs', {
+            currentUser: req.session.currentUser,
+            error
+        })
+    }
+})
+
 // Delete
 postRouter.delete('/:id', isUser, async (req, res) => {
     try {
@@ -137,6 +165,7 @@ postRouter.delete('/:id', isUser, async (req, res) => {
         })
     }
 })
+
 
 // Update
 postRouter.put('/:id', isUser, async (req, res, next) => {
@@ -195,10 +224,12 @@ postRouter.get('/:id', async (req, res, next) => {
     try {
         const foundPost = await Post.findById(req.params.id).populate('author', 'username')
         const sameUser = isSameUser(req, res, next, foundPost)
+        const isAdmin = req.session.currentUser.admin
         res.render('posts/show.ejs', {
             currentUser: req.session.currentUser,
             post: foundPost,
-            sameUser
+            sameUser,
+            isAdmin
         })
     } catch (error) {
         res.render('error.ejs', {

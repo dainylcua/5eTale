@@ -1,6 +1,6 @@
 module.exports = [{
         "name": "Generic Post",
-        "author": "6164c7c06d30200c16f638f0",
+        "author": "61671fdbaa5acacc65af733b",
         "description": "Just a generic post for testing",
         "contentType": "general",
         "content": {
@@ -47,7 +47,7 @@ module.exports = [{
     },
     {
         "name": "Cool item",
-        "author": "6164c7c06d30200c16f638f0",
+        "author": "61645759f518672482dfe19e",
         "description": "It's very cool",
         "contentType": "item",
         "content": {

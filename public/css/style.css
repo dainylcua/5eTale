@@ -32,6 +32,24 @@ body {
     min-height: 3.5rem;
 }
 
+.navbar-burger {
+    color: var(--ct1);
+    transition: box-shadow 0.2s, background-color 0.15s ease;
+}
+
+.navbar-burger:hover {
+    color: var(--ct1);
+    background-color: var(--bg1)!important;
+    color: var(--ct1)!important;
+    box-shadow: inset 0 11px 11px rgba(0,0,0,0.11), 
+    inset 0 12px 12px rgba(0,0,0,0.11), 
+    inset 0 14px 14px rgba(0,0,0,0.11)
+}
+
+.navbar-menu {
+    background-color: var(--acc1);
+}
+
 .navbar-item {
     transition: box-shadow 0.2s, background-color 0.15s ease;
     font-family: var(--main-fonts);
@@ -78,7 +96,20 @@ body {
     position: absolute;
     opacity: 0.2;
     scale: 7;
-    right: 1rem;
+    right: 3.5rem;
+    bottom: 3.5rem;
+}
+
+.show-item {
+    position: absolute;
+    opacity: 0.1;
+    scale: 10;
+    right: 5.5rem;
+    bottom: 5.5rem;
+}
+
+.homebrew-description {
+    min-height: 12rem;
 }
 
 .footer {

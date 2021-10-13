@@ -3,8 +3,11 @@
 
 <div class="container">
     <h1>Dashboard</h1>
-    <form action="/posts/seed" method="post">
-        <input type="submit" value="Seed data">
-    </form>
+    <div class="column is-6">
+        <button class="button is-fullwidth" id="seed">Seed Data</button>
+    </div>
+    <div class="column is-6">
+        <button class="button is-fullwidth" id="delete-all">Delete All</button>
+    </div>
 </div>
 <%- include('./partials/footer.ejs') %>

@@ -1,25 +1,34 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
-    <% if(currentUser) { %>
-    <div class="navbar-start">
-        <a href="/" class="navbar-item">Home</a>
-        <a href="/posts" class="navbar-item">Browse</a>
-        <a href="/posts/create" class="navbar-item">Create</a>
+    <div class="navbar-brand">
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
     </div>
-    <div class="navbar-end">
-        <a href="/dashboard" class="navbar-item"><%=currentUser.username%>'s Dashboard</a>
-        <a href="/" class="navbar-item">Favorites</a>
-        <form class="pl-0 navbar-item" action="/sessions?_method=DELETE" method="POST">
-            <input class="button" type="submit" value="Log Out" />
-        </form>
+    <div class="navbar-menu">
+        <% if(currentUser) { %>
+        <div class="navbar-start">
+            <a href="/" class="navbar-item">Home</a>
+            <a href="/posts" class="navbar-item">Browse</a>
+            <a href="/posts/create" class="navbar-item">Create</a>
+        </div>
+        <div class="navbar-end">
+            <a href="/dashboard" class="navbar-item"><%=currentUser.username%>'s Dashboard</a>
+            <a href="/" class="navbar-item">Favorites</a>
+            <form class="pl-0 navbar-item" action="/sessions?_method=DELETE" method="POST">
+                <input class="button" type="submit" value="Log Out" />
+            </form>
+        </div>
+        <% } else { %>
+        <div class="navbar-start">
+            <a href="/" class="navbar-item">Home</a>
+            <a href="/posts" class="navbar-item">Browse</a>
+        </div>
+        <div class="navbar-end">
+            <a class="navbar-item" href="/users/new">Register</a>
+            <a class="navbar-item" href="/sessions/new">Login</a>
+        </div>
+        <% } %>
     </div>
-    <% } else { %>
-    <div class="navbar-start">
-        <a href="/" class="navbar-item">Home</a>
-        <a href="/posts" class="navbar-item">Browse</a>
-    </div>
-    <div class="navbar-end">
-        <a class="navbar-item" href="/users/new">Register</a>
-        <a class="navbar-item" href="/sessions/new">Login</a>
-    </div>
-    <% } %>
 </nav>
