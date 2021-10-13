@@ -29,9 +29,9 @@ const isSameUser = (req, res, next, post) => {
     return false
 }
 
-const isAdmin = (req, res, next) => {
+const isAdminStrict = (req, res, next) => {
     try {
-        if (!req.session.currentUser) {
+        if (!req.session.currentUser.admin) {
             throw new Error('Administrator operation only.')
         }
         next()
@@ -41,6 +41,12 @@ const isAdmin = (req, res, next) => {
             error
         })
     }
+}
+
+const isAdminValue = (req, res, next) => {
+    if(!req.session.currentUser) return false
+    if(req.session.currentUser.admin) return true
+    return false
 }
 
 const dataSanitize = (req, res, next) => {
@@ -98,7 +104,7 @@ const dataSanitize = (req, res, next) => {
 // Remember INDUCES
 
 // Seed route
-postRouter.post('/seed', isUser, isAdmin, async (req, res, next) => {
+postRouter.post('/seed', isAdminStrict, async (req, res, next) => {
     try {
         await Post.create(postSeed, {author: req.session.currentUser._id})
         res.redirect('/posts')
@@ -141,7 +147,7 @@ postRouter.get('/create', isUser, (req, res) => {
 })
 
 // Delete ALL
-postRouter.delete('/all', isUser, isAdmin, async (req, res) => {
+postRouter.delete('/all', isUser, isAdminStrict, async (req, res) => {
     try {
         await Post.deleteMany({})
         window.location.href = '/posts'
@@ -224,12 +230,12 @@ postRouter.get('/:id', async (req, res, next) => {
     try {
         const foundPost = await Post.findById(req.params.id).populate('author', 'username')
         const sameUser = isSameUser(req, res, next, foundPost)
-        const isAdmin = req.session.currentUser.admin
+        const adminUser = isAdminValue(req, res, next)
         res.render('posts/show.ejs', {
             currentUser: req.session.currentUser,
             post: foundPost,
             sameUser,
-            isAdmin
+            adminUser
         })
     } catch (error) {
         res.render('error.ejs', {

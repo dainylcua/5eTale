@@ -3,11 +3,16 @@
 
 <div class="container">
     <h1>Dashboard</h1>
-    <div class="column is-6">
-        <button class="button is-fullwidth" id="seed">Seed Data</button>
-    </div>
-    <div class="column is-6">
-        <button class="button is-fullwidth" id="delete-all">Delete All</button>
+    <div class="columns">
+        <!-- Enable only if admin -->
+        <% if(currentUser.admin) { %>
+            <div class="column is-6">
+                <button class="button is-fullwidth" id="seed">Seed Data</button>
+            </div>
+            <div class="column is-6">
+                <button class="button is-fullwidth" id="delete-all">Delete All</button>
+            </div>
+        <% } %>
     </div>
 </div>
 <%- include('./partials/footer.ejs') %>

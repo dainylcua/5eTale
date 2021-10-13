@@ -75,6 +75,7 @@ if (!!$('#delete-all').length) {
         $.ajax({
             url: `/posts/all`,
             type: 'DELETE',
+            success: () => { window.location.href = '/posts' }
         }).then(() => window.location.href = '/posts')
     })
 }
