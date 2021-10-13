@@ -62,6 +62,7 @@ body {
 
 .card {
     background-color: var(--bg2);
+    position: relative;
 }
 
 .card-content > .title {
@@ -71,6 +72,13 @@ body {
 .card-footer {
     border-top: none;
     font-style: italic;
+}
+
+.card-item {
+    position: absolute;
+    opacity: 0.2;
+    scale: 7;
+    right: 1rem;
 }
 
 .footer {

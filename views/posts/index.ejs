@@ -26,6 +26,22 @@
                             <%=post.author.username%>
                         </div>
                     </div>
+                    <div class="card-item">
+                        <% switch (post.contentType) {
+                            case 'general': %>
+                                <i class="fa-solid fa-dice-d6"></i>
+                                <% break
+                            case 'item': %>
+                            <% if(post.content.itemType === 'offensive') { %>
+                                <i class="fa-solid fa-khanda"></i>
+                            <% } else if(post.content.itemType === 'defensive') { %>
+                                <i class="fa-solid fa-shield-blank"></i>
+                            <% } else { %>
+                                <i class="fa-solid fa-ring"></i>
+                            <% } %>
+                            <% break
+                        } %>
+                    </div>
                     <footer class="card-footer mt-0">
                         <div class="card-footer-item">
                             <% if (post.contentType == 'item') { %>
