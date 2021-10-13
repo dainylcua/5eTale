@@ -18,7 +18,7 @@ body {
     font-family: var(--body-fonts);
     background-color: var(--bg1);
     color: var(--ct1)!important;
-    height: 100%;
+    min-height: 100%;
     font-size: 1.1rem;
 }
 
@@ -72,7 +72,11 @@ body {
 }
 
 .container {
-    margin-top: 5rem;
+    margin-top: 4rem;
+}
+
+.container.side-hero {
+    margin-top: 2rem;
 }
 
 .box {
@@ -116,6 +120,7 @@ body {
 .footer {
     background-color: var(--acc1);
     margin-top: 5rem;
+    min-height: 22rem;
     box-shadow: 0 -1px 1px rgba(0,0,0,0.11), 
     0 -2px 2px rgba(0,0,0,0.11), 
     0 -4px 4px rgba(0,0,0,0.11), 
@@ -136,5 +141,16 @@ body {
 
 .subtitle {
     opacity: 0.5;
+}
+
+.dashtab > a,
+.dashtab > a:hover {
+    color: var(--ct1);
+}
+
+.dashtab.is-active > a,
+.dashtab.is-active > a:hover {
+    color: var(--bg2)!important;
+    border-bottom-color: var(--acc1)!important;
 }
 

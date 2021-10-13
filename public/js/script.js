@@ -88,3 +88,10 @@ if (!!$('#seed').length) {
         }).then(() => window.location.href = '/posts')
     })
 }
+
+if(!!$('.dashtab').length) {
+    $('.dashtab').on('click', function(evt) {
+        $(this).addClass('is-active')
+        $(this).siblings().removeClass('is-active')
+    })
+}

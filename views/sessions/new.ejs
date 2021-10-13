@@ -1,15 +1,39 @@
 <%- include('../partials/head.ejs') %>
 <%- include('../partials/nav.ejs') %>
 
-<h1>Login</h1>
-<form action="/sessions" method="POST">
-    <label for="username">Username:</label>
-    <input type="username" name="username" id="username" />
+<div class="container side-hero">
+    <section class="hero is-small">
+        <div class="hero-body">
+            <p class="title is-size-1">
+                Log In
+            </p>
+            <p class="subtitle">
+                Welcome back!
+            </p>
+        </div>
+    </section>
+</div>
 
-    <label for="password">Password:</label>
-    <input type="password" name="password" id="password" />
-
-    <input type="submit" value="Login" />
-</form>
+<div class="container">
+    <div class="columns">
+        <div class="column is-6">
+            <div class="box">
+                <form action="/sessions" method="POST" autocomplete="off">
+                    <div class="field">
+                        <label class="label" for="username">Username:</label>
+                        <input class="input" type="username" name="username" id="username" />
+                    </div>
+                
+                    <div class="field">
+                        <label class="label" for="password">Password:</label>
+                        <input class="input" type="password" name="password" id="password" />
+                    </div>
+                
+                    <input class="button" type="submit" value="Login" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <%- include('../partials/footer.ejs') %>

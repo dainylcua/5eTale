@@ -29,8 +29,10 @@ userRouter.post('/', async (req, res) => {
         req.session.currentUser = newUser
         res.redirect('/')
     } catch (error) {
-        // res.redirect('error.ejs', { error })
-        res.send(`hoi hoi ${error}`)
+        res.render('error.ejs', {
+            currentUser: req.session.currentUser,
+            error
+        })
     }
 })
 

@@ -1,8 +1,21 @@
 <%- include('./partials/head.ejs') %>
 <%- include('./partials/nav.ejs') %>
 
+<div class="container side-hero">
+    <section class="hero is-small">
+        <div class="hero-body py-0">
+            <p class="title is-size-1">
+                Dashboard
+            </p>
+            <p class="subtitle">
+                See your posts, your favorites, and your collections!
+            </p>
+        </div>
+    </section>
+</div>
+
+
 <div class="container">
-    <h1>Dashboard</h1>
     <div class="columns">
         <!-- Enable only if admin -->
         <% if(currentUser.admin) { %>
@@ -13,6 +26,19 @@
                 <button class="button is-fullwidth" id="delete-all">Delete All</button>
             </div>
         <% } %>
+    </div>
+    <div class="columns">
+        <div class="column">
+            <div class="tabs is-large is-fullwidth">
+                <ul>
+                    <li class="dashtab is-active" id="my-posts"><a>My Posts</a></li>
+                    <li class="dashtab" id="my-favorites"><a>My Favorites</a></li>
+                    <li class="dashtab" id="my-collections"><a>My Collections</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="columns">
     </div>
 </div>
 <%- include('./partials/footer.ejs') %>

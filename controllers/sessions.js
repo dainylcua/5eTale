@@ -25,7 +25,10 @@ sessionRouter.post('/', async (req, res) => {
         req.session.currentUser = foundUser
         res.redirect('/') 
     } catch (error) {
-        res.send(`hoi ${error}`)
+        res.render('error.ejs', {
+        currentUser: req.session.currentUser,
+        error
+    })
     }
 })
 
@@ -40,7 +43,10 @@ sessionRouter.delete('/', async (req, res) => {
         req.session.destroy()
         res.redirect('/')
     } catch (error) {
-        res.send(`hoi ${error}`)
+        res.render('error.ejs', {
+        currentUser: req.session.currentUser,
+        error
+    })
     }
 })
 
