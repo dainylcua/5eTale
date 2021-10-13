@@ -11,6 +11,7 @@
 
 html {
     scroll-behavior: smooth;
+    height: 100%;
 }
 
 body {
@@ -120,6 +121,17 @@ body {
     0 -4px 4px rgba(0,0,0,0.11), 
     0 -6px 8px rgba(0,0,0,0.11),
     0 -8px 16px rgba(0,0,0,0.11);
+}
+
+.footer-content > a:link,
+.footer-content > a:visited,
+.footer-content > a:active {
+    color: var(--ct1);
+    transition: color 0.20s ease;
+}
+
+.footer-content > a:hover {
+    color: var(--ct2);
 }
 
 .subtitle {
