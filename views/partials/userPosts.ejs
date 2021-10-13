@@ -1,0 +1,55 @@
+<% if(userPosts.length === 0) { %>
+    <div class="columns">
+        <div class="column">
+            <div class="box">Nothing's here... try making an item!</div>
+        </div>
+    </div>
+<% } %>
+
+<% userPosts.forEach((post, idx) => { %>
+    <% if(!(idx % 3)) { %>
+        <div class="columns"> 
+    <% } %>
+    <div class="column is-4">
+            <a href="/posts/<%=post._id%>">
+            <div class="card">
+                <div class="card-content pb-0">
+                    <div class="title">
+                        <%=post.name%>
+                    </div>
+                    <div class="subtitle">
+                        <%=post.author.username%>
+                    </div>
+                </div>
+                <div class="card-item">
+                    <% switch (post.contentType) {
+                        case 'general': %>
+                            <i class="fa-solid fa-dice-d6"></i>
+                            <% break
+                        case 'item': %>
+                        <% if(post.content.itemType === 'offensive') { %>
+                            <i class="fa-solid fa-khanda"></i>
+                        <% } else if(post.content.itemType === 'defensive') { %>
+                            <i class="fa-solid fa-shield-blank"></i>
+                        <% } else { %>
+                            <i class="fa-solid fa-ring"></i>
+                        <% } %>
+                        <% break
+                    } %>
+                </div>
+                <footer class="card-footer mt-0">
+                    <div class="card-footer-item">
+                        <% if (post.contentType == 'item') { %>
+                            <%=`${post.contentType}, ${post.content.itemType}`%>
+                        <% } else { %>
+                            <%=post.contentType%>
+                        <% } %>
+                    </div>
+                </footer>
+            </div>
+        </a>
+        </div>
+    <% if(((idx % 3) === 2) || idx === userPosts.length-1) { %>
+        </div> 
+    <% } %>
+<% }) %>

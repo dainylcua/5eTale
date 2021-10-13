@@ -33,19 +33,6 @@ db.on('disconnected', () => console.log(`User... it was nice to meet you. Goodby
 // Mount Middleware
 ////
 
-const isUser = (req, res, next) => {
-    try {
-        if (!req.session.currentUser) {
-            throw new Error('Please log in to continue.')
-        }
-        next()
-    } catch (error) {
-        res.render('error.ejs', {
-            currentUser: req.session.currentUser,
-            error
-        })
-    }
-}
 
 const app = express()
 app.use(methOv('_method'))
@@ -67,11 +54,13 @@ app.use(morgan('dev'))
 const userController = require('./controllers/users.js')
 const sessionController = require('./controllers/sessions.js')
 const postController = require('./controllers/posts.js')
+const mainController = require('./controllers/main.js')
 
 
 app.use('/users', userController)
 app.use('/sessions', sessionController)
 app.use('/posts', postController)
+app.use('/', mainController)
 
 
 app.get('/', (req, res) => {
@@ -80,11 +69,7 @@ app.get('/', (req, res) => {
     })
 })
 
-app.get('/dashboard', isUser, (req, res) => {
-    res.render('dashboard.ejs', {
-        currentUser: req.session.currentUser
-    })
-})
+
 
 ///////
 // Listener

@@ -38,24 +38,14 @@
             </div>
         </div>
     </div>
-    <div class="tab-container">
-        <div class="columns">
-            <div class="column is-4">
-                <div class="box">
-                    
-                </div>
-            </div>
-            <div class="column is-4">
-                <div class="box">
-                    
-                </div>
-            </div>
-            <div class="column is-4">
-                <div class="box">
-                    
-                </div>
-            </div>
-        </div>
+    <div class="tab-container" id="post-layout">
+        <%- include('./partials/userPosts.ejs') %>
+    </div>
+    <div class="tab-container" id="fav-layout">
+        <%- include('./partials/userFavs.ejs') %>
+    </div>
+    <div class="tab-container" id="coll-layout">
+        <%- include('./partials/userCollections.ejs') %>
     </div>
 </div>
 <%- include('./partials/footer.ejs') %>

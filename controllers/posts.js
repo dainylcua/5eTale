@@ -11,6 +11,7 @@ const User = require('../models/user.js')
 // Controller Middleware
 ////
 const isUser = (req, res, next) => {
+    // Sends error if not logged in
     try {
         if (!req.session.currentUser) {
             throw new Error('Please log in to continue.')
@@ -25,12 +26,14 @@ const isUser = (req, res, next) => {
 }
 
 const isSameUser = (req, res, next, post) => {
+    // Passes true if same user as post
     if (!req.session.currentUser) return false
     if (req.session.currentUser._id == post.author._id) return true
     return false
 }
 
 const isAdminStrict = (req, res, next) => {
+    // Sends error if not admin
     try {
         if (!req.session.currentUser.admin) {
             throw new Error('Administrator operation only.')
@@ -45,12 +48,14 @@ const isAdminStrict = (req, res, next) => {
 }
 
 const isAdminValue = (req, res, next) => {
+    // Passes true if admin
     if (!req.session.currentUser) return false
     if (req.session.currentUser.admin) return true
     return false
 }
 
 const dataSanitize = (req, res, next) => {
+    // Sanitizes data based on content
     const postObj = {}
     postObj.name = req.body.name
     postObj.author = req.session.currentUser._id
@@ -179,8 +184,10 @@ postRouter.delete('/:id', isUser, async (req, res) => {
 // Update
 postRouter.put('/:id', isUser, async (req, res, next) => {
     try {
+        // Passes contentType to data sanitization
         const postToUpdate = await Post.findById(req.params.id)
         req.body.contentType = postToUpdate.contentType
+        // Ensures that the author stays the same
         const updatedObject = dataSanitize(req, res, next)
         updatedObject.author = postToUpdate.author
         await Post.findByIdAndUpdate(
@@ -203,10 +210,10 @@ postRouter.post('/', isUser, async (req, res, next) => {
         const createdPost = await Post.create(postObj)
         await User.findByIdAndUpdate(req.session.currentUser._id, {
             $push: {
-                'favoriteIds': createdPost._id
+                'postIds': createdPost._id
             }
         })
-
+        req.session.currentUser.postIds.push(createdPost._id)
         res.redirect('/posts')
     } catch (error) {
         res.render('error.ejs', {
