@@ -4,6 +4,7 @@
 const express = require('express')
 const postRouter = express.Router()
 const Post = require('../models/post.js')
+const postSeed = require('../models/postSeed.js')
 
 ///////
 // Controller Middleware
@@ -81,6 +82,19 @@ const dataSanitize = (req, res, next) => {
 
 // Remember INDUCES
 
+// Seed route
+postRouter.post('/seed', isUser, async (req, res, next) => {
+    try {
+        await Post.create(postSeed, {author: req.session.currentUser._id})
+        res.redirect('/posts')
+    } catch (error) {
+        res.render('error.ejs', {
+            currentUser: req.session.currentUser,
+            error
+        })
+    }
+})
+
 // Index
 postRouter.get('/', async (req, res) => {
     try {
@@ -115,7 +129,7 @@ postRouter.get('/create', isUser, (req, res) => {
 postRouter.delete('/:id', isUser, async (req, res) => {
     try {
         await Post.findByIdAndDelete(req.params.id)
-        res.redirect('/posts')
+        window.location.href = '/posts'
     } catch (error) {
         res.render('error.ejs', {
             currentUser: req.session.currentUser,

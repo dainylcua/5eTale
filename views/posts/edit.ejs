@@ -8,7 +8,11 @@
                 <div class="box">
                     <h1 class="title" style="color:var(--ct2)">Edit Post</h1>
                     
-                    <form action="/posts/<%=post._id%>?_method=PUT" method="POST">
+                    <form action="/posts/<%=post._id%>?_method=PUT" method="POST" autocomplete="off">
+                        <div class="field">
+                            <label class="label has-text-weight-bold">Post Description</label>
+                            <textarea name="description" id="" cols="30" rows="10" class="textarea"></textarea>
+                        </div>
                         <% switch(post.contentType) {
                             // Changes edit layout based on type of post content
                             case 'general': %>
@@ -25,9 +29,193 @@
     
                                 <div class="field">
                                     <label class="label has-text-weight-bold">Homebrew Description</label>
+                                    <textarea name="genDescription" id="" cols="30" rows="10" class="textarea"><%=post.content.description%></textarea>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label has-text-weight-bold">Homebrew Features</label>
                                     <textarea name="genFeatures" id="" cols="30" rows="10" class="textarea"><%=post.content.features%></textarea>
                                 </div>
+
                                 <input type="submit" class="button" value="Post Edit">
+                            </div>
+                            <% break
+
+                            case 'item': %>
+                            <div class="field">
+                                <label class="label has-text-weight-bold">Item Name</label>
+                                <div class="control is-expanded has-icons-left">
+                                    <input name="itemName" type="text" class="input" value="<%=post.content.description%>">
+                                    <span class="icon is-small is-left">
+                                        <i class="fa-solid fa-heading"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label class="label has-text-weight-bold">Item Description</label>
+                                <textarea name="itemDescription" id="" cols="30" rows="10" class="textarea"><%=post.content.description%></textarea>
+                            </div>
+
+                            <div class="field">
+                                <label class="label has-text-weight-bold">Item Type</label>
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="itemRarity">
+                                            <option value="none" selected disabled hidden></option>
+                                            <option value="common">Common</option>
+                                            <option value="uncommon">Uncommon</option>
+                                            <option value="rare">Rare</option>
+                                            <option value="veryRare">Very Rare</option>
+                                            <option value="legendary">Legendary</option>
+                                            <option value="artifact">Artifact</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label class="checkbox">
+                                    <input type="checkbox" name="itemWondrous" <%=post.content.wondrous ? 'checked' : '' %>>
+                                    Wondrous item?
+                                </label>
+                            </div>
+
+                            <div class="field">
+                                <label class="checkbox">
+                                    <input type="checkbox" name="itemAttune" <%=post.content.attunement ? 'checked' : '' %>>
+                                    Requires attunement?
+                                </label>
+                            </div>
+
+                            <div class="field">
+                                <label class="label has-text-weight-bold">Item Type</label>
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="itemType" id="item-type">
+                                            <option value="none" selected disabled hidden></option>
+                                            <option value="offensive">Offensive</option>
+                                            <option value="defensive">Defensive</option>
+                                            <option value="misc">Miscellaneous</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            // Item specificity layouts
+                            <div class="item-container" id="off-layout" style="display:none">
+                                <div class="field">
+                                    <label class="label has-text-weight-bold">Weapon Damage</label>
+                                    <div class="control is-expanded has-icons-left">
+                                        <input name="itemDamage" type="text" class="input" value="<%=post.content.damage%>">
+                                        <span class="icon is-small is-left">
+                                            <i class="fa-solid fa-heading"></i>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label has-text-weight-bold">Weapon Effects</label>
+                                    <textarea name="itemEffects" id="" cols="30" rows="10" class="textarea"><%=post.content.effects%></textarea>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label has-text-weight-bold">Weapon Weight (lbs)</label>
+                                    <div class="control is-expanded has-icons-left">
+                                        <input name="itemWeight" type="number" class="input" value="<%=post.content.weight%>">
+                                        <span class="icon is-small is-left">
+                                            <i class="fa-solid fa-heading"></i>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label has-text-weight-bold">Weapon Value</label>
+                                    <div class="control is-expanded has-icons-left">
+                                        <input name="itemValue" type="text" class="input" value="<%=post.content.value%>">
+                                        <span class="icon is-small is-left">
+                                            <i class="fa-solid fa-heading"></i>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <input type="submit" class="button" value="Post Homebrew">
+                                </div>
+                            </div>
+
+
+                            <div class="item-container" id="def-layout" style="display:none">
+                                <div class="field">
+                                    <label class="label has-text-weight-bold">Armor Class</label>
+                                    <div class="control is-expanded has-icons-left">
+                                        <input name="itemAc" type="text" class="input" value="<%=post.content.ac%>">
+                                        <span class="icon is-small is-left">
+                                            <i class="fa-solid fa-heading"></i>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label has-text-weight-bold">Armor Effects</label>
+                                    <textarea name="itemEffects" id="" cols="30" rows="10" class="textarea"><%=post.content.effects%></textarea>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label has-text-weight-bold">Armor Weight (lbs)</label>
+                                    <div class="control is-expanded has-icons-left">
+                                        <input name="itemWeight" type="number" class="input" value="<%=post.content.weight%>">
+                                        <span class="icon is-small is-left">
+                                            <i class="fa-solid fa-heading"></i>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label has-text-weight-bold">Armor Value</label>
+                                    <div class="control is-expanded has-icons-left">
+                                        <input name="itemValue" type="text" class="input" value="<%=post.content.value%>">
+                                        <span class="icon is-small is-left">
+                                            <i class="fa-solid fa-heading"></i>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <input type="submit" class="button" value="Post Homebrew">
+                                </div>
+                            </div>
+
+
+                            <div class="item-container" id="misc-layout" style="display:none">
+                                <div class="field">
+                                    <label class="label has-text-weight-bold">Item Effects</label>
+                                    <textarea name="itemEffects" id="" cols="30" rows="10" class="textarea"><%=post.content.description%></textarea>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label has-text-weight-bold">Item Weight (lbs)</label>
+                                    <div class="control is-expanded has-icons-left">
+                                        <input name="itemWeight" type="number" class="input" value="<%=post.content.weight%>">
+                                        <span class="icon is-small is-left">
+                                            <i class="fa-solid fa-heading"></i>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label has-text-weight-bold">Item Value</label>
+                                    <div class="control is-expanded has-icons-left">
+                                        <input name="itemValue" type="text" class="input" value="<%=post.content.value%>">
+                                        <span class="icon is-small is-left">
+                                            <i class="fa-solid fa-heading"></i>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <input type="submit" class="button" value="Post Homebrew">
+                                </div>
                             </div>
                             <% break
                         } %>
