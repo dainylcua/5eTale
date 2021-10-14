@@ -1,4 +1,10 @@
 ///////
+// File Explanation
+////
+// Collection model
+
+
+///////
 // Dependencies
 ////
 const mongoose = require('mongoose')
