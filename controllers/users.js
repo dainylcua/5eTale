@@ -1,10 +1,4 @@
 ///////
-// File Explanation
-////
-// Controls user creation
-
-
-///////
 // Dependencies
 ////
 const bcrypt = require('bcrypt')
@@ -23,19 +17,9 @@ const User = require('../models/user.js')
 
 // Remember INDUCES
 userRouter.get('/new', (req, res) => {
-    try {
-        if(req.session.currentUser) {
-            res.redirect('/')
-        }
-        res.render('users/new.ejs', {
-            currentUser: req.session.currentUser
-        })
-    } catch (error) {
-        res.render('error.ejs', {
-            currentUser: req.session.currentUser,
-            error
-        })
-    }
+    res.render('users/new.ejs', {
+        currentUser: req.session.currentUser
+    })
 })
 
 userRouter.post('/', async (req, res) => {

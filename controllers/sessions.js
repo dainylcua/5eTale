@@ -1,10 +1,4 @@
 ///////
-// File Explanation
-////
-// Controls session creation and destruction
-
-
-///////
 // Dependencies
 ////
 const bcrypt = require('bcrypt')
@@ -13,10 +7,15 @@ const sessionRouter = express.Router()
 const User = require('../models/user.js')
 
 ///////
+// Controller Middleware
+////
+
+
+///////
 // Controller Routes
 ////
 
-// Handles login request
+// Remember INDUCES
 sessionRouter.post('/', async (req, res) => {
     try {
         const foundUser = await User.findOne({ username: req.body.username })
@@ -26,34 +25,19 @@ sessionRouter.post('/', async (req, res) => {
         req.session.currentUser = foundUser
         res.redirect('/') 
     } catch (error) {
-        res.render('sessions/new.ejs', {
-            currentUser: req.session.currentUser,
-            error
-        })
-    }
-})
-
-
-// Handles login
-sessionRouter.get('/new', (req, res) => {
-    try {
-        if(req.session.currentUser) {
-            res.redirect('/')
-        }
-        res.render('sessions/new.ejs', {
-            currentUser: req.session.currentUser,
-            error: null,
-        })
-    } catch (error) {
         res.render('error.ejs', {
-            currentUser: req.session.currentUser,
-            error
-        })
+        currentUser: req.session.currentUser,
+        error
+    })
     }
 })
 
+sessionRouter.get('/new', (req, res) => {
+    res.render('sessions/new.ejs', {
+        currentUser: req.session.currentUser
+    })
+})
 
-// Handles logout
 sessionRouter.delete('/', async (req, res) => {
     try {
         req.session.destroy()
@@ -65,7 +49,6 @@ sessionRouter.delete('/', async (req, res) => {
     })
     }
 })
-
 
 ///////
 // Exports
