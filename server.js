@@ -31,6 +31,7 @@ const userController = require('./controllers/users.js')
 const sessionController = require('./controllers/sessions.js')
 const postController = require('./controllers/posts.js')
 const mainController = require('./controllers/main.js')
+const apiController = require('./controllers/api.js')
 
 
 ///////
@@ -58,6 +59,7 @@ app.use('/users', userController)
 app.use('/sessions', sessionController)
 app.use('/posts', postController)
 app.use('/', mainController)
+app.use('/api', apiController)
 
 
 ///////
