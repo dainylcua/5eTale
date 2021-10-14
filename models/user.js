@@ -1,10 +1,4 @@
 ///////
-// File Explanation
-////
-// User model
-
-
-///////
 // Dependencies
 ////
 const mongoose = require('mongoose')
@@ -19,7 +13,6 @@ const userSchema = Schema({
     collectionIds: {type: Array, default: []},
     admin: { type: Boolean, default: false }
 }, { timestamps: true })
-
 
 ///////
 // Schema to Model and Export

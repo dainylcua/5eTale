@@ -1,21 +1,14 @@
 ///////
-// File Explanation
-////
-// Controls dashboard and index
-
-
-///////
 // Dependencies
 ////
 const express = require('express')
 const mainRouter = express.Router()
+const User = require('../models/user.js')
 const Post = require('../models/post.js')
-
 
 ///////
 // Controller Middleware
 ////
-// Ensures user is logged in, strict redirector
 const isUser = (req, res, next) => {
     try {
         if (!req.session.currentUser) {
@@ -34,7 +27,6 @@ const isUser = (req, res, next) => {
 ///////
 // Controller Routes
 ////
-// Index page
 mainRouter.get('/', (req, res) => {
     res.render('index.ejs', {
         currentUser: req.session.currentUser
@@ -42,7 +34,6 @@ mainRouter.get('/', (req, res) => {
 })
 
 
-// Dashboard page
 mainRouter.get('/dashboard', isUser, async (req, res) => {
     try {
         const userFavs = await Post.find({'_id': {$in: req.session.currentUser.favoriteIds}}).populate('author','username')
