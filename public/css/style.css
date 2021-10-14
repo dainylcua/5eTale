@@ -7,6 +7,7 @@
     --acc2: #FFE987; /* pap-yellow-lighter */
     --ct1: #FDFDFD; /* bone-white */
     --ct2: #26210F /* pap-yellow-black */
+    --sns: #4782c9 /* sans-blue */
 }
 
 html {
@@ -86,6 +87,10 @@ body {
 .card {
     background-color: var(--bg2);
     position: relative;
+}
+
+.card.collection {
+    background-color: var(--sns);
 }
 
 .card-content > .title {
