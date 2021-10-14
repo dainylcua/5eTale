@@ -129,7 +129,6 @@ postRouter.post('/seed', isAdminStrict, async (req, res, next) => {
 postRouter.get('/', async (req, res) => {
     try {
         const postList = await Post.find({}).populate('author', 'username')
-        console.log(req.session.currentUser)
         res.render('posts/index.ejs', {
             currentUser: req.session.currentUser,
             posts: postList
