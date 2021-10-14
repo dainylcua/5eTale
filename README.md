@@ -20,7 +20,7 @@
 
 ## Screenshots
 
-![5eTale Landing Page](images/5eTale-landing "5eTale Landing Page")
+![5eTale Landing Page](images/5eTale-landing.png "5eTale Landing Page")
 
 ## Getting Started
 
