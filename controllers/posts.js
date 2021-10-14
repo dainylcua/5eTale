@@ -43,23 +43,6 @@ const isSameUser = (req, res, next, post) => {
 }
 
 
-// Ensures user is admin, strict redirector
-const isAdminStrict = (req, res, next) => {
-    // Sends error if not admin
-    try {
-        if (!req.session.currentUser.admin) {
-            throw new Error('Administrator operation only.')
-        }
-        next()
-    } catch (error) {
-        res.render('error.ejs', {
-            currentUser: req.session.currentUser,
-            error
-        })
-    }
-}
-
-
 // Checks if user is admin, used for editing and deleting controls
 const isAdminValue = (req, res, next) => {
     // Passes true if admin
@@ -122,22 +105,6 @@ const dataSanitize = (req, res, next) => {
 ///////
 // Controller Routes
 ////
-// Seed route -- Include for demonstration purposes
-postRouter.post('/seed', isAdminStrict, async (req, res, next) => {
-    try {
-        await Post.create(postSeed, {
-            author: req.session.currentUser._id
-        })
-        res.redirect('/posts')
-    } catch (error) {
-        res.render('error.ejs', {
-            currentUser: req.session.currentUser,
-            error
-        })
-    }
-})
-
-
 // Index
 postRouter.get('/', async (req, res) => {
     try {
@@ -161,20 +128,6 @@ postRouter.get('/create', isUser, (req, res) => {
         res.render('posts/new.ejs', {
             currentUser: req.session.currentUser
         })
-    } catch (error) {
-        res.render('error.ejs', {
-            currentUser: req.session.currentUser,
-            error
-        })
-    }
-})
-
-
-// Delete ALL
-postRouter.delete('/all', isUser, isAdminStrict, async (req, res) => {
-    try {
-        await Post.deleteMany({})
-        window.location.href = '/posts'
     } catch (error) {
         res.render('error.ejs', {
             currentUser: req.session.currentUser,
