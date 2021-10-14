@@ -20,7 +20,7 @@
 
 ## Screenshots
 
-WIP
+![5eTale Landing Page](images/5eTale-landing "5eTale Landing Page")
 
 ## Getting Started
 
@@ -36,6 +36,6 @@ Click [here](https://trello.com/b/kwTailwi/user-stories) to see my progress on t
 * Improve existing models
 * Improve UI/UX
 * Commenting
-* ...
+* ...and more!
 
 
