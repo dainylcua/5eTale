@@ -10,7 +10,6 @@
 const express = require('express')
 const postRouter = express.Router()
 const Post = require('../models/post.js')
-const postSeed = require('../models/postSeed.js')
 const User = require('../models/user.js')
 const mongoose = require('mongoose')
 
