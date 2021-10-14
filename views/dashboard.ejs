@@ -3,7 +3,7 @@
 
 <div class="container side-hero">
     <section class="hero is-small">
-        <div class="hero-body py-0">
+        <div class="hero-body">
             <p class="title is-size-1">
                 Dashboard
             </p>
@@ -33,7 +33,7 @@
                 <ul>
                     <li class="dashtab is-active" id="my-posts"><a>My Posts</a></li>
                     <li class="dashtab" id="my-favorites"><a>My Favorites</a></li>
-                    <li class="dashtab" id="my-collections"><a>My Collections</a></li>
+                    <!-- <li class="dashtab" id="my-collections"><a>My Collections</a></li> TODO: Add later -->
                 </ul>
             </div>
         </div>
@@ -41,11 +41,11 @@
     <div class="tab-container" id="post-layout">
         <%- include('./partials/userPosts.ejs') %>
     </div>
-    <div class="tab-container" id="fav-layout">
+    <div class="tab-container" id="fav-layout" style="display:none">
         <%- include('./partials/userFavs.ejs') %>
     </div>
-    <div class="tab-container" id="coll-layout">
+    <!-- <div class="tab-container" id="coll-layout" style="display:none">
         <%- include('./partials/userCollections.ejs') %>
-    </div>
+    </div> -->
 </div>
 <%- include('./partials/footer.ejs') %>

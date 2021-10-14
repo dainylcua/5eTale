@@ -23,17 +23,19 @@ db.on('error', (err) => console.log(`Mushroom dance, mushroom dance, whatever co
 db.on('connected', () => console.log(`hOI! welcome to... PORT ${db.port}!`))
 db.on('disconnected', () => console.log(`User... it was nice to meet you. Goodbye.`))
 
+
 ///////
 // Models and Controllers
 ////
-
+const userController = require('./controllers/users.js')
+const sessionController = require('./controllers/sessions.js')
+const postController = require('./controllers/posts.js')
+const mainController = require('./controllers/main.js')
 
 
 ///////
 // Mount Middleware
 ////
-
-
 const app = express()
 app.use(methOv('_method'))
 app.use(express.static('public'))
@@ -48,27 +50,14 @@ app.use(session({
 }))
 app.use(morgan('dev'))
 
+
 ///////
 // Routes
 ////
-const userController = require('./controllers/users.js')
-const sessionController = require('./controllers/sessions.js')
-const postController = require('./controllers/posts.js')
-const mainController = require('./controllers/main.js')
-
-
 app.use('/users', userController)
 app.use('/sessions', sessionController)
 app.use('/posts', postController)
 app.use('/', mainController)
-
-
-app.get('/', (req, res) => {
-    res.render('index.ejs', {
-        currentUser: req.session.currentUser
-    })
-})
-
 
 
 ///////

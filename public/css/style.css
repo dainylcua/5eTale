@@ -6,8 +6,8 @@
     --bg2: #FFE366; /* pap-yellow */
     --acc2: #FFE987; /* pap-yellow-lighter */
     --ct1: #FDFDFD; /* bone-white */
-    --ct2: #26210F /* pap-yellow-black */
-    --sns: #4782c9 /* sans-blue */
+    --ct2: #26210F; /* pap-yellow-black */
+    --sns: #4782c9; /* sans-blue */
 }
 
 html {
@@ -158,3 +158,15 @@ body {
     color: var(--bg2)!important;
 }
 
+a.icon:link,
+a.icon:active,
+a.icon:visited,
+a.icon,
+a.icon.fav:hover {
+    color: var(--ct2);
+}
+
+a.icon.fav,
+a.icon:hover {
+    color: var(--sns);
+}

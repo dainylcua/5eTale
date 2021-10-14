@@ -8,7 +8,7 @@
                 Browse
             </p>
             <p class="subtitle">
-                Check out our items!
+                Check out our homebrews! Click a card's icon to favorite it.
             </p>
         </div>
     </section>
@@ -31,7 +31,7 @@
             <div class="columns"> 
         <% } %>
         <div class="column is-4">
-                <a href="/posts/<%=post._id%>">
+            <a href="/posts/<%=post._id%>">
                 <div class="card">
                     <div class="card-content pb-0">
                         <div class="title">
@@ -42,6 +42,13 @@
                         </div>
                     </div>
                     <div class="card-item">
+                        <% if(currentUser) { %>
+                            <% if(currentUser.favoriteIds.indexOf(post._id.toString()) !== -1) { %>
+                                <a class="icon fav" href="/posts/<%=post._id%>/unfavorite">
+                            <% } else { %>
+                                <a class="icon" href="/posts/<%=post._id%>/favorite">
+                            <% }%>
+                        <% } %>
                         <% switch (post.contentType) {
                             case 'general': %>
                                 <i class="fa-solid fa-dice-d6"></i>
@@ -56,6 +63,7 @@
                             <% } %>
                             <% break
                         } %>
+                        <% if(currentUser) { %> </a> <% } %>
                     </div>
                     <footer class="card-footer mt-0">
                         <div class="card-footer-item">

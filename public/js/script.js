@@ -4,11 +4,11 @@ $(document).ready(function () {
     $(".navbar-burger").click(function () {
 
         // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-        $(".navbar-burger").toggleClass("is-active");
-        $(".navbar-menu").toggleClass("is-active");
+        $(".navbar-burger").toggleClass("is-active")
+        $(".navbar-menu").toggleClass("is-active")
 
-    });
-});
+    })
+})
 
 // If on the post creation page, toggle form visibility
 if (window.location.pathname == '/posts/create') {
@@ -77,7 +77,9 @@ if (!!$('#delete-all').length) {
         $.ajax({
             url: `/posts/all`,
             type: 'DELETE',
-            success: () => { window.location.href = '/posts' }
+            success: () => {
+                window.location.href = '/posts'
+            }
         }).then(() => window.location.href = '/posts')
     })
 }
@@ -93,8 +95,8 @@ if (!!$('#seed').length) {
 }
 
 // If there are tabs (dashboard only), toggle visibility
-if(!!$('.dashtab').length) {
-    $('.dashtab').on('click', function(evt) {
+if (!!$('.dashtab').length) {
+    $('.dashtab').on('click', function (evt) {
         $(this).addClass('is-active')
         $(this).siblings().removeClass('is-active')
         $('.tab-container').css('display', 'none')

@@ -6,6 +6,7 @@ const postRouter = express.Router()
 const Post = require('../models/post.js')
 const postSeed = require('../models/postSeed.js')
 const User = require('../models/user.js')
+const mongoose = require('mongoose')
 
 ///////
 // Controller Middleware
@@ -128,6 +129,7 @@ postRouter.post('/seed', isAdminStrict, async (req, res, next) => {
 postRouter.get('/', async (req, res) => {
     try {
         const postList = await Post.find({}).populate('author', 'username')
+        console.log(req.session.currentUser)
         res.render('posts/index.ejs', {
             currentUser: req.session.currentUser,
             posts: postList
@@ -252,6 +254,48 @@ postRouter.get('/:id', async (req, res, next) => {
             sameUser,
             adminUser
         })
+    } catch (error) {
+        res.render('error.ejs', {
+            currentUser: req.session.currentUser,
+            error
+        })
+    }
+})
+
+// Favorite and unfavorite
+postRouter.get('/:id/favorite', async (req, res, next) => {
+    try {
+        await User.findByIdAndUpdate(req.session.currentUser._id, {
+            $push: {
+                'favoriteIds': mongoose.Types.ObjectId(req.params.id)
+            }
+        })
+        await Post.findByIdAndUpdate(req.params.id, {
+            $inc: {favorites: 1}
+        })
+        req.session.currentUser.favoriteIds.push(req.params.id)
+        res.redirect('/posts')
+    } catch (error) {
+        res.render('error.ejs', {
+            currentUser: req.session.currentUser,
+            error
+        })
+    }
+})
+
+// Removes post from favorite if favorite
+postRouter.get('/:id/unfavorite', async (req, res, next) => {
+    try {
+        await User.findByIdAndUpdate(req.session.currentUser._id, {
+            $pull: {
+                'favoriteIds': mongoose.Types.ObjectId(req.params.id)
+            }
+        })
+        await Post.findByIdAndUpdate(req.params.id, {
+            $inc: {favorites: -1}
+        })
+        req.session.currentUser.favoriteIds.splice(req.session.currentUser.favoriteIds.indexOf(req.params.id), 1)
+        res.redirect('/posts')
     } catch (error) {
         res.render('error.ejs', {
             currentUser: req.session.currentUser,
