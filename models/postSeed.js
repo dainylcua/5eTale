@@ -1,7 +1,7 @@
 ///////
 // File Explanation
 ////
-// Seed route TODO: Remove
+// Seed route
 
 
 module.exports = [

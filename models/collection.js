@@ -1,7 +1,7 @@
 ///////
 // File Explanation
 ////
-// Collection model - TODO: REMOVE
+// Collection model
 
 
 ///////
