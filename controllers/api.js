@@ -1,18 +1,19 @@
 ///////
+// File Explanation
+////
+// Controls api requests, returns a json object
+
+
+///////
 // Dependencies
 ////
 const apiRouter = require('express').Router()
 const Post = require('../models/post.js')
 
-///////
-// Controller Middleware
-////
-
 
 ///////
 // Controller Routes
 ////
-
 // Index
 apiRouter.get('/', async (req,res) => {
     try {
@@ -41,6 +42,7 @@ apiRouter.get('/:id', async (req, res) => {
         })
     }
 })
+
 
 ///////
 // Exports

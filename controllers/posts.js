@@ -1,4 +1,10 @@
 ///////
+// File Explanation
+////
+// Controls post routing for all INDUCES routes, includes favorites/unfavorites, seed route, and delete all
+
+
+///////
 // Dependencies
 ////
 const express = require('express')
@@ -8,11 +14,12 @@ const postSeed = require('../models/postSeed.js')
 const User = require('../models/user.js')
 const mongoose = require('mongoose')
 
+
 ///////
 // Controller Middleware
 ////
+// Ensures user is logged in, strict redirector
 const isUser = (req, res, next) => {
-    // Sends error if not logged in
     try {
         if (!req.session.currentUser) {
             throw new Error('Please log in to continue.')
@@ -26,6 +33,8 @@ const isUser = (req, res, next) => {
     }
 }
 
+
+// Checks if user is the same user as the one who created the post, used for editing and deleting controls
 const isSameUser = (req, res, next, post) => {
     // Passes true if same user as post
     if (!req.session.currentUser) return false
@@ -33,6 +42,8 @@ const isSameUser = (req, res, next, post) => {
     return false
 }
 
+
+// Ensures user is admin, strict redirector
 const isAdminStrict = (req, res, next) => {
     // Sends error if not admin
     try {
@@ -48,6 +59,8 @@ const isAdminStrict = (req, res, next) => {
     }
 }
 
+
+// Checks if user is admin, used for editing and deleting controls
 const isAdminValue = (req, res, next) => {
     // Passes true if admin
     if (!req.session.currentUser) return false
@@ -55,6 +68,8 @@ const isAdminValue = (req, res, next) => {
     return false
 }
 
+
+// Sanitizes data on new posts or post updates
 const dataSanitize = (req, res, next) => {
     // Sanitizes data based on content
     const postObj = {}
@@ -107,10 +122,7 @@ const dataSanitize = (req, res, next) => {
 ///////
 // Controller Routes
 ////
-
-// Remember INDUCES
-
-// Seed route
+// Seed route -- Include for demonstration purposes
 postRouter.post('/seed', isAdminStrict, async (req, res, next) => {
     try {
         await Post.create(postSeed, {
@@ -125,11 +137,11 @@ postRouter.post('/seed', isAdminStrict, async (req, res, next) => {
     }
 })
 
+
 // Index
 postRouter.get('/', async (req, res) => {
     try {
         const postList = await Post.find({}).populate('author', 'username')
-        console.log(req.session.currentUser)
         res.render('posts/index.ejs', {
             currentUser: req.session.currentUser,
             posts: postList
@@ -141,6 +153,7 @@ postRouter.get('/', async (req, res) => {
         })
     }
 })
+
 
 // New
 postRouter.get('/create', isUser, (req, res) => {
@@ -156,6 +169,7 @@ postRouter.get('/create', isUser, (req, res) => {
     }
 })
 
+
 // Delete ALL
 postRouter.delete('/all', isUser, isAdminStrict, async (req, res) => {
     try {
@@ -168,6 +182,7 @@ postRouter.delete('/all', isUser, isAdminStrict, async (req, res) => {
         })
     }
 })
+
 
 // Delete
 postRouter.delete('/:id', isUser, async (req, res) => {
@@ -242,6 +257,7 @@ postRouter.get('/:id/edit', isUser, async (req, res) => {
     }
 })
 
+
 // Show
 postRouter.get('/:id', async (req, res, next) => {
     try {
@@ -262,7 +278,8 @@ postRouter.get('/:id', async (req, res, next) => {
     }
 })
 
-// Favorite and unfavorite
+
+// Favorite
 postRouter.get('/:id/favorite', async (req, res, next) => {
     try {
         await User.findByIdAndUpdate(req.session.currentUser._id, {
@@ -283,7 +300,8 @@ postRouter.get('/:id/favorite', async (req, res, next) => {
     }
 })
 
-// Removes post from favorite if favorite
+
+// Unfavorite
 postRouter.get('/:id/unfavorite', async (req, res, next) => {
     try {
         await User.findByIdAndUpdate(req.session.currentUser._id, {
@@ -303,6 +321,7 @@ postRouter.get('/:id/unfavorite', async (req, res, next) => {
         })
     }
 })
+
 
 ///////
 // Exports

@@ -7,8 +7,13 @@
             <p class="title is-size-1">
                 Log In
             </p>
-            <p class="subtitle">
-                Welcome back!
+            <% if(!error ) { %>
+                <p class="subtitle">
+                    Welcome back!
+            <% } else { %>
+                <p class="subtitle" style="color:var(--hrt);opacity:1;">
+                    <%=error%>
+            <%  } %>
             </p>
         </div>
     </section>

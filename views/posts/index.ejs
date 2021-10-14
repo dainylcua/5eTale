@@ -8,7 +8,7 @@
                 Browse
             </p>
             <p class="subtitle">
-                Check out our homebrews! Click a card's icon to favorite it.
+                Check out our homebrews! <%= currentUser ? `Click a card's icon to favorite it.` : '' %>
             </p>
         </div>
     </section>

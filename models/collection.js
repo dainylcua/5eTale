@@ -1,4 +1,10 @@
 ///////
+// File Explanation
+////
+// Collection model - TODO: REMOVE
+
+
+///////
 // Dependencies
 ////
 const mongoose = require('mongoose')
@@ -9,6 +15,7 @@ const collectionSchema = Schema({
     author: { type: String, required: true },
     postIds: { type: Array, required: true }
 }, { timestamps: true })
+
 
 ///////
 // Schema to Model and Export

@@ -1,4 +1,9 @@
 ///////
+// File Explanation
+////
+// Includes all dependencies, configurations, database handling, and app routing
+
+///////
 // Dependencies
 ////
 const express = require('express')
