@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 const session = require('express-session')
 const methOv = require('method-override')
 const morgan = require('morgan')
+const cors = require('cors')
 
 
 // Config .env
@@ -38,6 +39,7 @@ const apiController = require('./controllers/api.js')
 // Mount Middleware
 ////
 const app = express()
+app.use(cors())
 app.use(methOv('_method'))
 app.use(express.static('public'))
 app.use(express.json())
